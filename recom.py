@@ -1,9 +1,11 @@
 import mysql.connector  
 import networkx as nx
 
+# jakim try
+
 # Connect to MySQL database
 db_connection = mysql.connector.connect(
-    host="192.168.100.5",
+    host="localhost",
     user="root",  # Replace with your MySQL username
     password="",  # Replace with your MySQL password
     database="social_media"
