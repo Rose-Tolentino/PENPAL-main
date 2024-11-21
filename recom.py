@@ -1,8 +1,6 @@
 import mysql.connector  
 import networkx as nx
 
-# jakim try
-
 # Connect to MySQL database
 db_connection = mysql.connector.connect(
     host="localhost",
