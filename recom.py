@@ -1,6 +1,8 @@
 import mysql.connector
 import networkx as nx
 
+# ginawa ni rose na changes
+
 # Connect to MySQL database
 db_connection = mysql.connector.connect(
     host="localhost",
