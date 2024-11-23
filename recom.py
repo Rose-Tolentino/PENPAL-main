@@ -130,7 +130,7 @@ class SocialMediaGraph:
 
         db_cursor.execute("UPDATE friend_requests SET status = 'accepted' WHERE from_user = %s AND to_user = %s", (from_user, user))
         db_cursor.execute(
-            "INSERT INTO friendships (user1, user2, shared_social_link) VALUES (%s, %s, FALSE), (%s, %s, FALSE)",
+            "INSERT INTO friendships (user1, user2, social_links) VALUES (%s, %s, FALSE), (%s, %s, FALSE)",
             (user, from_user, from_user, user)
         )
         db_connection.commit()
@@ -147,12 +147,36 @@ class SocialMediaGraph:
         db_connection.commit()
         print(f"{user} declined the friend request from {from_user}")
 
+    def view_all_friends(self, username):
+        """View all friends of a user from the database."""
+        # Check if the user exists in the database
+        db_cursor.execute("SELECT username FROM users WHERE username = %s", (username,))
+        if not db_cursor.fetchone():
+            print(f"User {username} does not exist.")
+            return []
+
+        # Retrieve friends from the friendships table
+        db_cursor.execute("""
+            SELECT user2 FROM friendships WHERE user1 = %s
+            UNION
+            SELECT user1 FROM friendships WHERE user2 = %s
+        """, (username, username))
+        
+        friends = [row[0] for row in db_cursor.fetchall()]
+
+        if friends:
+            print(f"Friends of {username}: {', '.join(friends)}")
+        else:
+            print(f"{username} has no friends yet.")
+        
+        return friends
+
     def share_social_link(self, user, to_user):
         """Share the social link with a new friend."""
         share_social = input(f"Do you want to share your social link with {to_user}? (yes/no): ").strip().lower()
         if share_social == "yes":
             db_cursor.execute(
-                "UPDATE friendships SET shared_social_link = TRUE WHERE (user1 = %s AND user2 = %s) OR (user1 = %s AND user2 = %s)",
+                "UPDATE friendships SET social_links = TRUE WHERE (user1 = %s AND user2 = %s) OR (user1 = %s AND user2 = %s)",
                 (user, to_user, to_user, user)
             )
             db_connection.commit()
@@ -294,7 +318,8 @@ def main():
             print("1. View Friend Requests")
             print("2. Send Friend Request")
             print("3. Accept Friend Request")
-            print("4. Back to Main Menu")
+            print("4. View All Friends")
+            print("5. Back to Main Menu")
 
             friend_choice = input("Enter your choice: ")
 
@@ -314,8 +339,10 @@ def main():
                 from_user = input("Enter the username to accept a friend request from: ")
                 sm_graph.accept_friend_request(logged_in_user, from_user)
                 sm_graph.share_social_link(logged_in_user, from_user)
-
             elif friend_choice == "4":
+                    sm_graph.view_all_friends(logged_in_user)
+                    break
+            elif friend_choice == "5":
                 continue
 
         elif choice == "3" and logged_in_user:
