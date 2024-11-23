@@ -2,7 +2,7 @@ import mysql.connector
 import networkx as nx
 
 # annie di ko makita gawa mo
-
+# hello annie2
 # Connect to MySQL database
 db_connection = mysql.connector.connect(
     host="localhost",
