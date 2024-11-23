@@ -1,7 +1,7 @@
 import mysql.connector
 import networkx as nx
 
-# ginawa ni rose na changes
+# annie di ko makita gawa mo
 
 # Connect to MySQL database
 db_connection = mysql.connector.connect(
