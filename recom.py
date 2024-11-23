@@ -2,7 +2,7 @@ import mysql.connector
 import networkx as nx
 
 # ginawa ni rose na changes
-# social_link, view friends -annie
+# social_link, view friends -annie3
 # Connect to MySQL database
 db_connection = mysql.connector.connect(
     host="localhost",
