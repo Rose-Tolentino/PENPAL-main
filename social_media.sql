@@ -1,10 +1,10 @@
---annie
+--annie2
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2024 at 11:40 AM
+-- Generation Time: Nov 23, 2024 at 01:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,20 +33,6 @@ CREATE TABLE `friendships` (
   `user2` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `friendships`
---
-
-INSERT INTO `friendships` (`user1`, `user2`) VALUES
-('anya', 'kal'),
-('anya', 'mallows'),
-('anya', 'moonie'),
-('kal', 'anya'),
-('kal', 'mallows'),
-('mallows', 'anya'),
-('mallows', 'kal'),
-('moonie', 'anya');
-
 -- --------------------------------------------------------
 
 --
@@ -58,33 +44,6 @@ CREATE TABLE `friend_requests` (
   `to_user` varchar(50) NOT NULL,
   `status` enum('pending','accepted','rejected') DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `friend_requests`
---
-
-INSERT INTO `friend_requests` (`from_user`, `to_user`, `status`) VALUES
-('anya', 'kal', 'accepted'),
-('kal', 'mallows', 'accepted'),
-('mallows', 'anya', 'accepted'),
-('moonie', 'anya', 'accepted');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `social_media_link`
---
-
-CREATE TABLE `social_media_link` (
-  `link` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `social_media_link`
---
-
-INSERT INTO `social_media_link` (`link`) VALUES
-('');
 
 -- --------------------------------------------------------
 
@@ -99,18 +58,8 @@ CREATE TABLE `users` (
   `gender` varchar(10) DEFAULT NULL,
   `interests` text DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `social_media_link` varchar(255) DEFAULT NULL
+  `social_links` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`username`, `age`, `location`, `gender`, `interests`, `password`, `social_media_link`) VALUES
-('anya', 2, 'cat land', 'F', 'bubong', 'anya', 'https//wagniyokopababainsabubong.com'),
-('kal', 19, 'taguig', 'F', 'cats, lloyd', 'kal', 'https//misskonasiya.com'),
-('mallows', 2, 'cat land', 'F', 'lloyd', 'mallows', 'https//ineedmorepetting.com'),
-('moonie', 3, 'taguig', 'F', '', 'moonie', NULL);
 
 --
 -- Indexes for dumped tables
