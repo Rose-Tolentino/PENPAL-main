@@ -3,7 +3,7 @@ import networkx as nx
 import bcrypt
 
 
-#ascii sa database -anniee hehe22
+#ascii sa database -anniee hehe222
 # Connect to MySQL database
 #cute ko par
 #kal
@@ -149,14 +149,14 @@ def create_account(username, age, location, gender, password):
         return
 
     # Hash the password before storing it
-    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')  # Decode to str
 
     sm_graph = SocialMediaGraph()
     user_data = {
         "age": age,
         "location": location,
         "gender": gender,
-        "password": hashed_password  # Store the hashed password
+        "password": hashed_password  # Store as str
     }
 
     social_media_link = input("Enter your social media account link (Optional): ").strip()
@@ -215,8 +215,8 @@ def login(username, password):
     result = db_cursor.fetchone()
 
     if result:
-        stored_hashed_password = result[0]
-        
+        stored_hashed_password = result[0].encode('utf-8')  # Convert str back to bytes
+
         # Compare the entered password with the stored hashed password
         if bcrypt.checkpw(password.encode('utf-8'), stored_hashed_password):
             print(f"Welcome back, {username}!")
