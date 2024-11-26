@@ -11,7 +11,7 @@ db_connection = mysql.connector.connect(
     host="localhost",
     user="root",  # Replace with your MySQL username
     password="",  # Replace with your MySQL password
-    database="interests"
+    database="social_media"
 )
 
 db_cursor = db_connection.cursor()
