@@ -1,7 +1,9 @@
 import mysql.connector  
 import networkx as nx
 import bcrypt
-#ascii sa database -anniee hehe2
+
+
+#ascii sa database -anniee hehe22
 # Connect to MySQL database
 #cute ko par
 #kal
@@ -329,7 +331,7 @@ def main():
 
 
         elif choice == "4" and not logged_in_user:
-            print(f"Exiting the system. Goodbye, {username}")
+            print(f"Exiting the system. Goodbye! Thank You For Using")
             break
 
         else:
