@@ -1,9 +1,6 @@
 import mysql.connector  
 import networkx as nx
-import bcrypt
-
-#ito na talaga -nie
-#ascii sa database -anniee hehe2223
+#trycomment  
 # Connect to MySQL database
 #cute ko par
 #kal
