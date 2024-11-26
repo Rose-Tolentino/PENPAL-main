@@ -142,17 +142,6 @@ class SocialMediaGraph:
         
         return friends
     
-    def view_all_users(self):
-        """Display all registered usernames."""
-        try:
-            db_cursor.execute("SELECT username FROM users")
-            users = db_cursor.fetchall()
-            print("\nAll Registered Users:")
-            for user in users:
-                print(user[0])
-        except mysql.connector.Error as err:
-            print(f"Error fetching users: {err}")
-
 # Account creation and login functions
 def create_account(username, age, location, gender, password):
     if age <= 17:
@@ -170,10 +159,10 @@ def create_account(username, age, location, gender, password):
         "password": hashed_password  # Store the hashed password
     }
 
-    social_media_link = input("Enter your social media account link (optional): ").strip()
+    social_media_link = input("Enter your social media account link (Optional): ").strip()
     user_data["social_media_link"] = social_media_link
 
-    terms = input("Do you agree to the Terms and Conditions? (yes/no): ").lower()
+    terms = input("Do you agree to the Terms and Conditions? (Yes/No): ").lower()
 
     if terms != "yes":
         print("You must agree to the Terms and Conditions to create an account.")
@@ -257,8 +246,7 @@ def main():
         if not logged_in_user:
             print("1. Create Account")
             print("2. Log In")
-            print("3. View All Registered Users")
-            print("4. Exit")
+            print("3. Exit")
         else:
             print("1. View Friend Recommendations")
             print("2. Add Friend Menu")
@@ -267,20 +255,17 @@ def main():
         choice = input("Enter your choice: ")
 
         if choice == "1" and not logged_in_user:
-            username = input("Enter username: ")
-            password = input("Enter password: ")
-            age = int(input("Enter age: "))
-            location = input("Enter location: ")
-            gender = input("Enter gender: ")
+            username = input("Enter Username: ")
+            password = input("Enter Password: ")
+            age = int(input("Enter : "))
+            location = input("Enter Location: ")
+            gender = input("Enter Gender (Male/Female): ")
             create_account(username, age, location, gender, password)
         
         elif choice == "2" and not logged_in_user:
-            username = input("Enter username: ")
-            password = input("Enter password: ")
+            username = input("Enter Username: ")
+            password = input("Enter Password: ")
             logged_in_user = login(username, password)
-
-        elif choice == "3" and not logged_in_user:
-            sm_graph.view_all_users()
 
         elif choice == "1" and logged_in_user:
             recommendations = sm_graph.recommend_friends(logged_in_user)
@@ -330,8 +315,8 @@ def main():
             print("Logged out successfully.")
 
 
-        elif choice == "4" and not logged_in_user:
-            print(f"Exiting the system. Goodbye! Thank You For Using")
+        elif choice == "3" and not logged_in_user:
+            print(f"Exiting the system. Goodbye! Thank You For Using Penpal!")
             break
 
         else:
