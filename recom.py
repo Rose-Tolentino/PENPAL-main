@@ -1,7 +1,7 @@
 import mysql.connector  
 import networkx as nx
 import bcrypt
-#ascii sa database -anniee
+#ascii sa database -anniee hehe2
 # Connect to MySQL database
 #cute ko par
 #kal
@@ -9,7 +9,7 @@ db_connection = mysql.connector.connect(
     host="localhost",
     user="root",  # Replace with your MySQL username
     password="",  # Replace with your MySQL password
-    database="social_media"
+    database="interests"
 )
 
 db_cursor = db_connection.cursor()
