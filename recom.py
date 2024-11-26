@@ -2,8 +2,8 @@ import mysql.connector
 import networkx as nx
 import bcrypt
 
-
-#ascii sa database -anniee hehe222
+#ito na talaga -nie
+#ascii sa database -anniee hehe2223
 # Connect to MySQL database
 #cute ko par
 #kal
@@ -257,7 +257,7 @@ def main():
         if choice == "1" and not logged_in_user:
             username = input("Enter Username: ")
             password = input("Enter Password: ")
-            age = int(input("Enter : "))
+            age = int(input("Enter Age: "))
             location = input("Enter Location: ")
             gender = input("Enter Gender (Male/Female): ")
             create_account(username, age, location, gender, password)
