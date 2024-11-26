@@ -1,5 +1,7 @@
 import mysql.connector
 import networkx as nx
+import bcrypt
+
 
 # ginawa ni rose na changes
 # social_link, view friends -annie3
@@ -42,11 +44,14 @@ class SocialMediaGraph:
                 print("Username already exists.")
                 return False
 
+            # Hash the password
+            hashed_password = bcrypt.hashpw(user_data["password"].encode('utf-8'), bcrypt.gensalt())
+
             db_cursor.execute(
                 "INSERT INTO users (username, age, location, gender, interests, social_links, password) "
                 "VALUES (%s, %s, %s, %s, %s, %s, %s)",
                 (username, user_data["age"], user_data["location"], user_data["gender"],
-                 ", ".join(user_data["interests"]), user_data["social_links"], user_data["password"])
+                ", ".join(user_data["interests"]), user_data["social_links"], hashed_password)
             )
             db_connection.commit()
             self.graph.add_node(username)
@@ -235,10 +240,11 @@ def login():
     print("\n--- Log In ---")
     username = input("Username: ")
     password = input("Password: ")
+
     try:
         db_cursor.execute("SELECT password FROM users WHERE username = %s", (username,))
         result = db_cursor.fetchone()
-        if result and result[0] == password:
+        if result and bcrypt.checkpw(password.encode('utf-8'), result[0].encode('utf-8')):
             print(f"Welcome back, {username}!")
             return username
         else:
